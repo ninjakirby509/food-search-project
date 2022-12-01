@@ -1,11 +1,15 @@
-# fly.toml file generated for foodsearch on 2022-11-30T14:36:01-06:00
+# fly.toml file generated for foodsearch on 2022-12-01T01:04:10-06:00
 
 app = "foodsearch"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+[build]
+  builder = "paketobuildpacks/builder:base"
+
 [env]
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []

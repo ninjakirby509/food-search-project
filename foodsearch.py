@@ -11,20 +11,19 @@ app = flask.Flask(__name__)
 yelp_url = "https://api.yelp.com/v3"
 search_url = "/businesses/search"
 yelp_key = os.getenv("YELP_KEY")
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("LOCAL_DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SECRET_KEY'] = 'SUPERSECRETKEY'
-yelp_db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
-class Person(yelp_db.Model):
+class Person(db.Model):
     __tablename__ = 'Username'
-    username = yelp_db.Column(yelp_db.String(50),primary_key = True)
-    password = yelp_db.Column(yelp_db.String(50),unique = True)
+    username = db.Column(db.String(50), primary_key = True)
+    password = db.Column(db.String(50), unique = True)
     def __init__(self,username,password):
         self.username = username
         self.password = password
 with app.app_context():
-    yelp_db.create_all()
+    db.create_all()
 @app.route('/')
 def login():
     """The login in screen """
@@ -39,8 +38,8 @@ def signup_handler():
     if thisuser is None:
         print("User does not exist")
         thisuser = Person(username,password)
-        yelp_db.session.add(thisuser)
-        yelp_db.session.commit()
+        db.session.add(thisuser)
+        db.session.commit()
     else:
         print("User Exit")
     return flask.render_template('login.html')
@@ -81,4 +80,4 @@ def homepage():
 
 
 
-app.run(debug=True)
+#app.run(debug=True)
