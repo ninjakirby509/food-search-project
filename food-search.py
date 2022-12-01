@@ -58,7 +58,7 @@ def login_handler():
         return flask.redirect(flask.url_for("login_handler"))
     else:
         return flask.redirect(flask.url_for("homepage"))
-@app.route('/index')
+@app.route('/index',methods =["POST","GET"])
 def homepage():
     headers = {
         "accept": "application/json",
@@ -69,7 +69,8 @@ def homepage():
         "location": location_data["location"] if location_data else "Hallettsville",
         "term": "food",
         "price": [1, 2, 3, 4],
-        "sort_by": "distance"
+        "sort_by": "distance",
+        "limit": 16
     }
     response = requests.get(yelp_url+search_url, headers=headers, params=params)
     for business in response.json()["businesses"]:
