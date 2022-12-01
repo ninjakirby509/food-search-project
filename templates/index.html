@@ -18,6 +18,12 @@
         <h6></h6>
         <h1>Time to eat </h1>
         <h6>all search results are provided by YELP</h6>
+        <form action="/index"method = "POST">
+            <input class="text" type="text" name="location" placeholder="location" required="">
+            <input type="submit" value="Time to find out">
+            
+        </form>
+
         {% for business in businesses %}
         <div style="white-space:nowrap;">
             <h1 style="display:inline; white-space:nowrap;">{{ business.name }}  </h1>
