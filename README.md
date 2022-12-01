@@ -25,7 +25,7 @@ Luke pull requests [1](https://github.com/ninjakirby509/food-search-project/pull
 
 This program was built in python and html using Flask and Jinja,
 & API calls were made using the requests library.
-After debugging, this was deployed [here](https://foodsearchdb.fly.dev/) using gunicorn and fly.io.
+After debugging, this was deployed [here](https://foodsearch.fly.dev/) using gunicorn and fly.io.
 
 For this version, a database was built using postgresql and hosted on fly.io as well.
 
