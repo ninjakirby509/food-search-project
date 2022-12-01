@@ -64,10 +64,11 @@ def homepage():
         "accept": "application/json",
         "Authorization": f"Bearer {yelp_key}"
     }
+    location_data = flask.request.form
     params = {
-        "location": "Hallettsville",
+        "location": location_data["location"] if location_data else "Hallettsville",
         "term": "food",
-        "price": [1,2,3,4],
+        "price": [1, 2, 3, 4],
         "sort_by": "distance"
     }
     response = requests.get(yelp_url+search_url, headers=headers, params=params)
@@ -77,25 +78,6 @@ def homepage():
         print("url:", business['url'])
     return flask.render_template('index.html', businesses = response.json()["businesses"])
 
-
-@app.route('/index')
-def homepage():
-    headers = {
-        "accept": "application/json",
-        "Authorization": f"Bearer {yelp_key}"
-    }
-    params = {
-        "location": "Hallettsville",
-        "term": "food",
-        "price": [1,2,3,4],
-        "sort_by": "distance"
-    }
-    response = requests.get(yelp_url+search_url, headers=headers, params=params)
-    for business in response.json()["businesses"]:
-        print("name:", business['name'])
-        print("id:", business['id'])
-        print("url:", business['url'])
-    return flask.render_template('index.html', businesses = response.json()["businesses"])
 
 
 app.run(debug=True)
