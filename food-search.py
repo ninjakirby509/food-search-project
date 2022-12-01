@@ -15,11 +15,22 @@ app.secret_key= "My key"
 @app.route('/')
 def login():
     """The login in screen """
+    return flask.render_template('signup.html')
+@app.route('/signup_handler',methods = ['POST'])
+def signup_handler():
+    """Handle Login"""
+    form_data = flask.request.form
+    username = form_data["Username"]
+    password = form_data["password"]
     return flask.render_template('login.html')
 @app.route('/login_handler',methods = ['POST'])
 def login_handler():
+    """Handle Login"""
+    print("Handle func")
+    form_data = flask.request.form
+    username = form_data["Username"]
+    password = form_data["password"]
     return flask.render_template('index.html')
-
 
 
 app.run(debug=True)
