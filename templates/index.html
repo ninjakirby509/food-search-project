@@ -1,26 +1,29 @@
 <html>
-    <body>
+    <head>
+        <title>Food Time</title>
         <style>
-            body{
-                background-image: url(https://media.istockphoto.com/id/925269242/photo/black-chalkboard-as-mockup-for-restaurant-menu.jpg?s=612x612&w=0&k=20&c=9h3SrwQE1iFvvI0l23oZOkTEUpgx7BWD5H-7L4Uxhi0=);
-                background-repeat: repeat-x;
-                background-size: contain;
-            }
-            h1{
-                color: aliceblue;
-                position: center;
-            }
+                body{
+                    background-image: url(https://media.istockphoto.com/id/925269242/photo/black-chalkboard-as-mockup-for-restaurant-menu.jpg?s=612x612&w=0&k=20&c=9h3SrwQE1iFvvI0l23oZOkTEUpgx7BWD5H-7L4Uxhi0=);
+                    background-repeat: repeat-x;
+                    background-size: contain;
+                }
+                h1{
+                    color: aliceblue;
+                    position: center;
+                }
         </style>
-        <head ></head>
+    </head>
+    <body>
+
+        <h6></h6>
         <h1>Time to eat </h1>
-<<<<<<< Updated upstream
-=======
         <h6>all search results are provided by YELP</h6>
         <form action="/index"method = "POST">
             <input class="text" type="text" name="location" placeholder="location" required="">
             <input type="submit" value="Time to find out">
             
         </form>
+
         {% for business in businesses %}
         <div style="white-space:nowrap;">
             <h1 style="display:inline; white-space:nowrap;">{{ business.name }}  </h1>
@@ -29,6 +32,5 @@
         </div>
         {% endfor %}
 
->>>>>>> Stashed changes
     </body>
 </html>

@@ -8,19 +8,13 @@ from flask_login import LoginManager
 
 load_dotenv(find_dotenv())
 app = flask.Flask(__name__)
-<<<<<<< Updated upstream
-app.secret_key= "My key"
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-#app.config['SECRET_KEY'] = 'SUPERSECRETKEY'
-#yelp_db = SQLAlchemy(app)
-=======
 yelp_url = "https://api.yelp.com/v3"
 search_url = "/businesses/search"
 yelp_key = os.getenv("YELP_KEY")
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("LOCAL_DATABASE_URL")
 app.config['SECRET_KEY'] = 'SUPERSECRETKEY'
 yelp_db = SQLAlchemy(app)
->>>>>>> Stashed changes
 
 class Person(yelp_db.Model):
     __tablename__ = 'Username'
@@ -50,16 +44,15 @@ def signup_handler():
     else:
         print("User Exit")
     return flask.render_template('login.html')
-@app.route('/login_handler',methods = ['POST'])
+
+
+@app.route('/login_handler', methods = ['POST'])
 def login_handler():
     """Handle Login"""
     print("Handle func")
     form_data = flask.request.form
     username = form_data["Username"]
     password = form_data["password"]
-<<<<<<< Updated upstream
-    return flask.render_template('index.html')
-=======
     thisuser = Person.query.filter_by(username=username).first()
     if thisuser is None:
         return flask.redirect(flask.url_for("login_handler"))
@@ -83,7 +76,26 @@ def homepage():
         print("id:", business['id'])
         print("url:", business['url'])
     return flask.render_template('index.html', businesses = response.json()["businesses"])
->>>>>>> Stashed changes
+
+
+@app.route('/index')
+def homepage():
+    headers = {
+        "accept": "application/json",
+        "Authorization": f"Bearer {yelp_key}"
+    }
+    params = {
+        "location": "Hallettsville",
+        "term": "food",
+        "price": [1,2,3,4],
+        "sort_by": "distance"
+    }
+    response = requests.get(yelp_url+search_url, headers=headers, params=params)
+    for business in response.json()["businesses"]:
+        print("name:", business['name'])
+        print("id:", business['id'])
+        print("url:", business['url'])
+    return flask.render_template('index.html', businesses = response.json()["businesses"])
 
 
 app.run(debug=True)
