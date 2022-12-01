@@ -1,17 +1,30 @@
 <html>
-    <body>
+    <head>
+        <title>Food Time</title>
         <style>
-            body{
-                background-image: url(https://media.istockphoto.com/id/925269242/photo/black-chalkboard-as-mockup-for-restaurant-menu.jpg?s=612x612&w=0&k=20&c=9h3SrwQE1iFvvI0l23oZOkTEUpgx7BWD5H-7L4Uxhi0=);
-                background-repeat: repeat-x;
-                background-size: contain;
-            }
-            h1{
-                color: aliceblue;
-                position: center;
-            }
+                body{
+                    background-image: url(https://media.istockphoto.com/id/925269242/photo/black-chalkboard-as-mockup-for-restaurant-menu.jpg?s=612x612&w=0&k=20&c=9h3SrwQE1iFvvI0l23oZOkTEUpgx7BWD5H-7L4Uxhi0=);
+                    background-repeat: repeat-x;
+                    background-size: contain;
+                }
+                h1{
+                    color: aliceblue;
+                    position: center;
+                }
         </style>
-        <head ></head>
+    </head>
+    <body>
+
+        <h6></h6>
         <h1>Time to eat </h1>
+        <h6>all search results are provided by YELP</h6>
+        {% for business in businesses %}
+        <div style="white-space:nowrap;">
+            <h1 style="display:inline; white-space:nowrap;">{{ business.name }}  </h1>
+            <a href={{business.url}} style="display:inline;"><img src="https://s3-media0.fl.yelpcdn.com/assets/public/cookbook.yji-0a2bf1d9c330d8747446.svg"></a>
+            <h1>-------------------------------------</h1>
+        </div>
+        {% endfor %}
+
     </body>
 </html>
